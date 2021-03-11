@@ -1,0 +1,8 @@
+prefix=/home/xcy/catkin_ws2/src/pointcloud/cmake-build-debug/devel
+
+Name: pointcloud
+Description: Description of pointcloud
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

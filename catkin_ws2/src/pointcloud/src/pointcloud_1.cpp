@@ -9,13 +9,11 @@ void PointCloud::detectionCallback(const sensor_msgs::PointCloud2::ConstPtr &msg
     pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_msg(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *pcl_msg);
     pcl::RangeImage range_image = trans_cloud_to_image(*pcl_msg);
-    res_border.header = msg->header;
-    res_border.width = msg->width;
-    res_border.height = msg->height;
-    res_border.is_dense = msg->is_dense;
-    res_border.sensor_orientation_ = msg->sensor_orientation_;
-    res_border.sensor_origin_ = msg->sensor_origin_;
-    res_border.points.resize(msg->points.size ());
+    //for(int i = 0; i < range_image.points.size(); ++i)
+        //std::cout << range_image.points[i];
+    //res_border.sensor_orientation_ = msg->sensor_orientation_;
+    //res_border.sensor_origin_ = msg->sensor_origin_;
+    //res_border.points.resize(msg->points.size ());
     BorderExtractor(range_image);
 
     // --test--cout
@@ -30,6 +28,8 @@ pcl::RangeImage& PointCloud::trans_cloud_to_image(const pcl::PointCloud<pcl::Poi
     float noise_level = 0.0;
     float min_range = 0.0f;
     int border_size = 1;
+    float angular_resolution_x;
+    float angular_resolution_y;
     Eigen::Affine3f scene_sensor_pose (Eigen::Affine3f::Identity());
     scene_sensor_pose = Eigen::Affine3f (Eigen::Translation3f(point_cloud.sensor_origin_[0],
                                                               point_cloud.sensor_origin_[1],
@@ -70,9 +70,14 @@ void PointCloud::BorderExtractor(const pcl::RangeImage range_image)
                 shadow_points.points.push_back(range_image[y*range_image.width + x]);
         }
     }
+    std::cout << border_points.points.size();
+    for(int i = 0; i < border_points.points.size(); ++i)
+         std::cout << border_points.points[i] << " " << endl;
     pcl::toROSMsg(border_points, res_border);
     pcl::toROSMsg(veil_points, res_veil);
     pcl::toROSMsg(shadow_points, res_shadow);
+    res_border.header.frame_id = "kinect_frame_optical";
+    res_border.header.stamp = ros::Time::now();
     res_pub.publish(res_border);
     //res_pub.publish(res_veil);
     //res_pub.publish(res_shadow);

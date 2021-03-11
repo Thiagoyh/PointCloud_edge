@@ -31,8 +31,8 @@ target_link_libraries(pointcloud_test ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PCL
 #add_executable(pointcloud_1 src/pointcloud_1.cpp)
 #target_link_libraries(pointcloud_1 ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PCL_COMMON_LIBRARIES})
 
-#add_executable(pub src/pub.cpp)
-#target_link_libraries(pub ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PCL_COMMON_LIBRARIES})
+add_executable(pub src/pub.cpp src/pointcloud_1.cpp src/pointcloud.h)
+target_link_libraries(pub ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PCL_COMMON_LIBRARIES})
 
 
 ## System dependencies are found with CMake's conventions

@@ -41,8 +41,7 @@ private:
     sensor_msgs::PointCloud2 res_veil;
     sensor_msgs::PointCloud2 res_shadow;
 
-    float angular_resolution_x;
-    float angular_resolution_y;
+
 
     pcl::RangeImage::CoordinateFrame coordinate_frame;
 
