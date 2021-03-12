@@ -28,8 +28,7 @@ pcl::RangeImage& PointCloud::trans_cloud_to_image(const pcl::PointCloud<pcl::Poi
     float noise_level = 0.0;
     float min_range = 0.0f;
     int border_size = 1;
-    float angular_resolution_x;
-    float angular_resolution_y;
+
     Eigen::Affine3f scene_sensor_pose (Eigen::Affine3f::Identity());
     scene_sensor_pose = Eigen::Affine3f (Eigen::Translation3f(point_cloud.sensor_origin_[0],
                                                               point_cloud.sensor_origin_[1],
@@ -56,6 +55,8 @@ void PointCloud::BorderExtractor(const pcl::RangeImage range_image)
     pcl::PointCloud<pcl::BorderDescription> border_descriptions;
     border_extractor.compute(border_descriptions);
 
+
+
     for(int y = 0; y < (int)range_image.height; ++y)
     {
         for(int x = 0; x < (int)range_image.width; ++x)
@@ -70,9 +71,9 @@ void PointCloud::BorderExtractor(const pcl::RangeImage range_image)
                 shadow_points.points.push_back(range_image[y*range_image.width + x]);
         }
     }
-    std::cout << border_points.points.size();
-    for(int i = 0; i < border_points.points.size(); ++i)
-         std::cout << border_points.points[i] << " " << endl;
+    // std::cout << border_points.points.size();
+    //for(int i = 0; i < border_points.points.size(); ++i)
+    //     std::cout << border_points.points[i] << " " << endl;
     pcl::toROSMsg(border_points, res_border);
     pcl::toROSMsg(veil_points, res_veil);
     pcl::toROSMsg(shadow_points, res_shadow);
