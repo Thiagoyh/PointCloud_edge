@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/xcy/catkin_ws3/src/cmake-build-debug/devel/setup.sh

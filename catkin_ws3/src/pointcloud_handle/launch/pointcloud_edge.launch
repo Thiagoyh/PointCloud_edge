@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+   <node name="pointcloud_handle" pkg = "pointcloud_handle" type="pub" output="screen">
+   </node>
+   
+   <!--<node pkg="rosbag" type="play" name="playe" args="/home/xcy/bag/rosbagsml1.bag"/>-->
+
+
+</launch>

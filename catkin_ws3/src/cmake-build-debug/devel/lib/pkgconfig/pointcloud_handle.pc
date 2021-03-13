@@ -1,0 +1,8 @@
+prefix=/home/xcy/catkin_ws3/src/cmake-build-debug/devel
+
+Name: pointcloud_handle
+Description: Description of pointcloud_handle
+Version: 0.0.0
+Cflags: -I/home/xcy/catkin_ws3/src/pointcloud_handle/include
+Libs: -L${prefix}/lib -lpointcloud_handle
+Requires: roscpp std_msgs
